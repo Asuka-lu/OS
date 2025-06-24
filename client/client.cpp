@@ -18,12 +18,12 @@
 using namespace std;
 vector<string> client;
 
-string userLogin = "C:\\Users\\Â¬¼Ò¬B\\Desktop\\²Ù×÷ÏµÍ³¿ÎÉè\\client\\user.txt";//ÓÃ»§Ä¿Â¼±í£¬ÓÃÓÚ¼ÇÂ¼ÓÃ»§ÃûºÍÃÜÂë
-string userName, userPassword;//µ±Ç°ÓÃ»§ÃûºÍÃÜÂë
+string userLogin = "~\\user.txt";//ç”¨æˆ·ç›®å½•è¡¨ï¼Œç”¨äºè®°å½•ç”¨æˆ·åå’Œå¯†ç 
+string userName, userPassword;//å½“å‰ç”¨æˆ·åå’Œå¯†ç 
 
-string curPath;//µ±Ç°Â·¾¶
-string userDat;//µ±Ç°ÓÃ´ÅÅÌÎÄ¼ş
-char* fdisk;//ĞéÄâ´ÅÅÌÆğÊ¼µØÖ·
+string curPath;//å½“å‰è·¯å¾„
+string userDat;//å½“å‰ç”¨ç£ç›˜æ–‡ä»¶
+char* fdisk;//è™šæ‹Ÿç£ç›˜èµ·å§‹åœ°å€
 char buffer[2000];
 
 void Cleanup(SOCKET socket)
@@ -54,7 +54,7 @@ void sendtoserver(SOCKET clientSocket, string sendMessage)
 	int sentBytes = send(clientSocket, sendMessage.c_str(), static_cast<int>(sendMessage.length()), 0);
 	if (sentBytes == SOCKET_ERROR || sentBytes == 0)
 	{
-		cout << "[·¢ËÍĞÅÏ¢Ê§°Ü] ´íÎó´úÂë£º" << WSAGetLastError() << endl;
+		cout << "[å‘é€ä¿¡æ¯å¤±è´¥] é”™è¯¯ä»£ç ï¼š" << WSAGetLastError() << endl;
 	}
 }
 
@@ -73,31 +73,31 @@ void Sendwait(SOCKET clientSocket)
 void help()
 {
 	cout << fixed << left;
-	cout << endl << "\t" << "*------------------ÎÄ¼şÏµÍ³-ÃüÁî²Ëµ¥--------------------*" << endl;
-	cout << "\t" << "|" << "\t" << 3 << "\t" << "mkdir (name)" << "\t" << "´´½¨Ä¿Â¼" << "\t" << "\t" << "|" << endl;
-	cout << "\t" << "|" << "\t" << 4 << "\t" << "create (name)" << "\t" << "´´½¨ÎÄ¼ş" << "\t" << "\t" << "|" << endl;
-	cout << "\t" << "|" << "\t" << 5 << "\t" << "open (name)" << "\t" << "´ò¿ªÎÄ¼ş" << "\t" << "\t" << "|" << endl;
-	cout << "\t" << "|" << "\t" << 6 << "\t" << "close (name)" << "\t" << "¹Ø±ÕÎÄ¼ş" << "\t" << "\t" << "|" << endl;
-	cout << "\t" << "|" << "\t" << 7 << "\t" << "read (name)" << "\t" << "¶ÁÎÄ¼ş" << "\t" << "\t" << "\t" << "|" << endl;
-	cout << "\t" << "|" << "\t" << 8 << "\t" << "del (name)" << "\t" << "É¾³ıÎÄ¼ş" << "\t" << "\t" << "|" << endl;
-	cout << "\t" << "|" << "\t" << 9 << "\t" << "remove(name)" << "\t" << "É¾³ıÄ¿Â¼" << "\t" << "\t" << "|" << endl;
-	cout << "\t" << "|" << "\t" << 10 << "\t" << "cd" << "\t" << "\t" << "ÇĞ»»Ä¿Â¼" << "\t" << "\t" << "|" << endl;
-	cout << "\t" << "|" << "\t" << 11 << "\t" << "dir" << "\t" << "\t" << "ÁĞ³öÄ¿Â¼" << "\t" << "\t" << "|" << endl;
-	cout << "\t" << "|" << "\t" << 12 << "\t" << "ls" << "\t" << "\t" << "ÁĞ³öÎÄ¼ş" << "\t" << "\t" << "|" << endl;
-	cout << "\t" << "|" << "\t" << 13 << "\t" << "write" << "\t" << "\t" << "Ğ´ÎÄ¼ş" << "\t" << "\t" << "\t" << "|" << endl;
-	cout << "\t" << "|" << "\t" << 14 << "\t" << "move" << "\t" << "\t" << "ÒÆ¶¯ÎÄ¼ş" << "\t" << "\t" << "|" << endl;
-	cout << "\t" << "|" << "\t" << 15 << "\t" << "copy" << "\t" << "\t" << "¿½±´ÎÄ¼ş" << "\t" << "\t" << "|" << endl;
-	cout << "\t" << "|" << "\t" << 16 << "\t" << "lock(name)" << "\t" << "ÎÄ¼ş¼ÓÃÜ " << "\t" << "\t" << "|" << endl;
-	cout << "\t" << "|" << "\t" << 17 << "\t" << "head -num" << "\t" << "ÏÔÊ¾ÎÄ¼şµÄÇ°numĞĞ" << "\t" << "|" << endl;
-	cout << "\t" << "|" << "\t" << 18 << "\t" << "tail -num" << "\t" << "ÏÔÊ¾ÎÄ¼şÎ²°ÍÉÏµÄnumĞĞ" << "\t" << "|" << endl;
-	cout << "\t" << "|" << "\t" << 19 << "\t" << "lseek -offerset" << "\t" << "ÎÄ¼ş¶ÁĞ´Ö¸ÕëµÄÒÆ¶¯" << "\t" << "|" << endl;
+	cout << endl << "\t" << "*------------------æ–‡ä»¶ç³»ç»Ÿ-å‘½ä»¤èœå•--------------------*" << endl;
+	cout << "\t" << "|" << "\t" << 3 << "\t" << "mkdir (name)" << "\t" << "åˆ›å»ºç›®å½•" << "\t" << "\t" << "|" << endl;
+	cout << "\t" << "|" << "\t" << 4 << "\t" << "create (name)" << "\t" << "åˆ›å»ºæ–‡ä»¶" << "\t" << "\t" << "|" << endl;
+	cout << "\t" << "|" << "\t" << 5 << "\t" << "open (name)" << "\t" << "æ‰“å¼€æ–‡ä»¶" << "\t" << "\t" << "|" << endl;
+	cout << "\t" << "|" << "\t" << 6 << "\t" << "close (name)" << "\t" << "å…³é—­æ–‡ä»¶" << "\t" << "\t" << "|" << endl;
+	cout << "\t" << "|" << "\t" << 7 << "\t" << "read (name)" << "\t" << "è¯»æ–‡ä»¶" << "\t" << "\t" << "\t" << "|" << endl;
+	cout << "\t" << "|" << "\t" << 8 << "\t" << "del (name)" << "\t" << "åˆ é™¤æ–‡ä»¶" << "\t" << "\t" << "|" << endl;
+	cout << "\t" << "|" << "\t" << 9 << "\t" << "remove(name)" << "\t" << "åˆ é™¤ç›®å½•" << "\t" << "\t" << "|" << endl;
+	cout << "\t" << "|" << "\t" << 10 << "\t" << "cd" << "\t" << "\t" << "åˆ‡æ¢ç›®å½•" << "\t" << "\t" << "|" << endl;
+	cout << "\t" << "|" << "\t" << 11 << "\t" << "dir" << "\t" << "\t" << "åˆ—å‡ºç›®å½•" << "\t" << "\t" << "|" << endl;
+	cout << "\t" << "|" << "\t" << 12 << "\t" << "ls" << "\t" << "\t" << "åˆ—å‡ºæ–‡ä»¶" << "\t" << "\t" << "|" << endl;
+	cout << "\t" << "|" << "\t" << 13 << "\t" << "write" << "\t" << "\t" << "å†™æ–‡ä»¶" << "\t" << "\t" << "\t" << "|" << endl;
+	cout << "\t" << "|" << "\t" << 14 << "\t" << "move" << "\t" << "\t" << "ç§»åŠ¨æ–‡ä»¶" << "\t" << "\t" << "|" << endl;
+	cout << "\t" << "|" << "\t" << 15 << "\t" << "copy" << "\t" << "\t" << "æ‹·è´æ–‡ä»¶" << "\t" << "\t" << "|" << endl;
+	cout << "\t" << "|" << "\t" << 16 << "\t" << "lock(name)" << "\t" << "æ–‡ä»¶åŠ å¯† " << "\t" << "\t" << "|" << endl;
+	cout << "\t" << "|" << "\t" << 17 << "\t" << "head -num" << "\t" << "æ˜¾ç¤ºæ–‡ä»¶çš„å‰numè¡Œ" << "\t" << "|" << endl;
+	cout << "\t" << "|" << "\t" << 18 << "\t" << "tail -num" << "\t" << "æ˜¾ç¤ºæ–‡ä»¶å°¾å·´ä¸Šçš„numè¡Œ" << "\t" << "|" << endl;
+	cout << "\t" << "|" << "\t" << 19 << "\t" << "lseek -offerset" << "\t" << "æ–‡ä»¶è¯»å†™æŒ‡é’ˆçš„ç§»åŠ¨" << "\t" << "|" << endl;
 	cout << "\t" << "|  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  - |" << endl;
-	cout << "\t" << "|" << "\t" << 20 << "\t" << "import" << "\t" << "\t" << "µ¼Èëµ½µ±Ç°Ä¿Â¼" << "\t" << "\t" << "|" << endl;
-	cout << "\t" << "|" << "\t" << 21 << "\t" << "export" << "\t" << "\t" << "µ¼³öµ½Ä¿µÄµØÖ·" << "\t" << "\t" << "|" << endl;
-	cout << "\t" << "|" << "\t" << 22 << "\t" << "clear" << "\t" << "\t" << "ÇåÆÁ" << "\t" << "\t" << "\t" << "|" << endl;
-	cout << "\t" << "|" << "\t" << 23 << "\t" << "help" << "\t" << "\t" << "ÏÔÊ¾ÃüÁî" << "\t" << "\t" << "|" << endl;
-	cout << "\t" << "|" << "\t" << 24 << "\t" << "exit" << "\t" << "\t" << "ÍË³öÏµÍ³" << "\t" << "\t" << "|" << endl;
-	cout << "\t" << "|" << "\t" << 25 << "\t" << "tree" << "\t" << "\t" << "Ê÷×´Í¼" << "\t" << "\t" << "\t" << "|" << endl;
+	cout << "\t" << "|" << "\t" << 20 << "\t" << "import" << "\t" << "\t" << "å¯¼å…¥åˆ°å½“å‰ç›®å½•" << "\t" << "\t" << "|" << endl;
+	cout << "\t" << "|" << "\t" << 21 << "\t" << "export" << "\t" << "\t" << "å¯¼å‡ºåˆ°ç›®çš„åœ°å€" << "\t" << "\t" << "|" << endl;
+	cout << "\t" << "|" << "\t" << 22 << "\t" << "clear" << "\t" << "\t" << "æ¸…å±" << "\t" << "\t" << "\t" << "|" << endl;
+	cout << "\t" << "|" << "\t" << 23 << "\t" << "help" << "\t" << "\t" << "æ˜¾ç¤ºå‘½ä»¤" << "\t" << "\t" << "|" << endl;
+	cout << "\t" << "|" << "\t" << 24 << "\t" << "exit" << "\t" << "\t" << "é€€å‡ºç³»ç»Ÿ" << "\t" << "\t" << "|" << endl;
+	cout << "\t" << "|" << "\t" << 25 << "\t" << "tree" << "\t" << "\t" << "æ ‘çŠ¶å›¾" << "\t" << "\t" << "\t" << "|" << endl;
 	cout << "\t" << "*-------------------------------------------------------*" << endl << endl;
 }
 
@@ -141,11 +141,11 @@ void menu(SOCKET clientSocket)
 				Readin(clientSocket);
 				if (strcmp(buffer, "tree-end") == 0)
 				{
-					sendtoserver(clientSocket, "ack"); // ·¢ËÍ ack ±íÊ¾½áÊø
+					sendtoserver(clientSocket, "ack"); // å‘é€ ack è¡¨ç¤ºç»“æŸ
 					break;
 				}
 				cout << buffer << endl;
-				sendtoserver(clientSocket, "ack"); // ·¢ËÍ ack ±íÊ¾ÊÕµ½
+				sendtoserver(clientSocket, "ack"); // å‘é€ ack è¡¨ç¤ºæ”¶åˆ°
 			}
 		}
 		else if (str[0] == "create")
@@ -168,7 +168,7 @@ void menu(SOCKET clientSocket)
 		{
 			string createinfo = str[0] + "-" + "1";
 			sendtoserver(clientSocket, createinfo);
-			cout << fixed << left << setw(20) << "ÎÄ¼şÃû" << setw(10) << "ÀàĞÍ" << setw(20) << "ÆğÊ¼´ÅÅÌ¿éºÅ" << setw(10) << "´óĞ¡" << setw(10) << "´ò¿ª×´Ì¬" << setw(10) << "¼ÓËø×´Ì¬" << setw(10) << "lseekÖ¸ÕëÎ»ÖÃ" << endl;
+			cout << fixed << left << setw(20) << "æ–‡ä»¶å" << setw(10) << "ç±»å‹" << setw(20) << "èµ·å§‹ç£ç›˜å—å·" << setw(10) << "å¤§å°" << setw(10) << "æ‰“å¼€çŠ¶æ€" << setw(10) << "åŠ é”çŠ¶æ€" << setw(10) << "lseekæŒ‡é’ˆä½ç½®" << endl;
 			for (int i = 2; i < 9; i++) {
 				Readin(clientSocket);
 				Sendwait(clientSocket);
@@ -228,7 +228,7 @@ void menu(SOCKET clientSocket)
 			sendtoserver(clientSocket, createinfo);
 			Readin(clientSocket);
 			Sendwait(clientSocket);
-			if (!strcmp(buffer, "ÕÒ²»µ½¸ÃÄ¿Â¼"))
+			if (!strcmp(buffer, "æ‰¾ä¸åˆ°è¯¥ç›®å½•"))
 				cout << buffer << endl;
 		}
 		else if (str[0] == "open")
@@ -254,19 +254,19 @@ void menu(SOCKET clientSocket)
 			Readin(clientSocket);
 			if (!strcmp(buffer, "-@not"))
 			{
-				cout << "ÎÄ¼şÎª¿Õ£¡" << endl;
+				cout << "æ–‡ä»¶ä¸ºç©ºï¼" << endl;
 			}
 			else if (!strcmp(buffer, "-@notseek"))
 			{
-				cout << "ÎÄ¼şÖ¸ÕëÖ®ºóÎª¿ÕÄÚÈİ" << endl;
+				cout << "æ–‡ä»¶æŒ‡é’ˆä¹‹åä¸ºç©ºå†…å®¹" << endl;
 			}
-			else if (!strcmp(buffer, "ÕÒ²»µ½¸ÃÎÄ¼ş") || !strcmp(buffer, "ÇëÏÈ´ò¿ª¸ÃÎÄ¼ş") || !strcmp(buffer, "ÎÄ¼şÒÑ¼ÓËø£¬ÇëÏÈ½âËø"))
+			else if (!strcmp(buffer, "æ‰¾ä¸åˆ°è¯¥æ–‡ä»¶") || !strcmp(buffer, "è¯·å…ˆæ‰“å¼€è¯¥æ–‡ä»¶") || !strcmp(buffer, "æ–‡ä»¶å·²åŠ é”ï¼Œè¯·å…ˆè§£é”"))
 			{
 				cout << buffer << endl;
 			}
 			else
 			{
-				cout << "--------------ÎÄ¼şÄÚÈİ£º--------------" << endl;
+				cout << "--------------æ–‡ä»¶å†…å®¹ï¼š--------------" << endl;
 				cout << buffer << endl;
 			}
 			Sendwait(clientSocket);
@@ -278,12 +278,12 @@ void menu(SOCKET clientSocket)
 			sendtoserver(clientSocket, createinfo);
 			Readin(clientSocket);
 			Sendwait(clientSocket);
-			if (strcmp(buffer, "¿ÉÒÔĞ´Èë¸ÃÎÄ¼ş") != 0)
+			if (strcmp(buffer, "å¯ä»¥å†™å…¥è¯¥æ–‡ä»¶") != 0)
 			{
 				cout << buffer << endl;
 			}
 			else {
-				cout << "ÇëÊäÈëÎÄ¼şÄÚÈİ£¬²¢ÒÔ'#'Îª½áÊø±êÖ¾" << endl;
+				cout << "è¯·è¾“å…¥æ–‡ä»¶å†…å®¹ï¼Œå¹¶ä»¥'#'ä¸ºç»“æŸæ ‡å¿—" << endl;
 				char ch;
 				string content;
 				int size = 0;
@@ -292,7 +292,7 @@ void menu(SOCKET clientSocket)
 					ch = getchar();
 					if (ch == '#')break;
 					if (size >= 100) {
-						cout << "ÊäÈëÎÄ¼şÄÚÈİ¹ı³¤£¡" << endl;
+						cout << "è¾“å…¥æ–‡ä»¶å†…å®¹è¿‡é•¿ï¼" << endl;
 						break;
 					}
 					content += ch;
@@ -328,7 +328,7 @@ void menu(SOCKET clientSocket)
 			}
 			else
 			{
-				cout << "Ä¿µÄÂ·¾¶²»ÕıÈ·£¡" << endl;
+				cout << "ç›®çš„è·¯å¾„ä¸æ­£ç¡®ï¼" << endl;
 				string createinfo = "meaningless-command";
 				sendtoserver(clientSocket, createinfo);
 				Readin(clientSocket);
@@ -352,21 +352,21 @@ void menu(SOCKET clientSocket)
 				Readin(clientSocket);
 				if (!strcmp(buffer, "-@not"))
 				{
-					cout << "ÎÄ¼şÎª¿Õ£¡" << endl;
+					cout << "æ–‡ä»¶ä¸ºç©ºï¼" << endl;
 				}
-				else if (!strcmp(buffer, "ÕÒ²»µ½¸ÃÎÄ¼ş") || !strcmp(buffer, "ÇëÏÈ´ò¿ª¸ÃÎÄ¼ş") || !strcmp(buffer, "ÎÄ¼şÒÑ¼ÓËø£¬ÇëÏÈ½âËø") || !strcmp(buffer, "ĞĞÊı×îĞ¡Îª1"))
+				else if (!strcmp(buffer, "æ‰¾ä¸åˆ°è¯¥æ–‡ä»¶") || !strcmp(buffer, "è¯·å…ˆæ‰“å¼€è¯¥æ–‡ä»¶") || !strcmp(buffer, "æ–‡ä»¶å·²åŠ é”ï¼Œè¯·å…ˆè§£é”") || !strcmp(buffer, "è¡Œæ•°æœ€å°ä¸º1"))
 				{
 					cout << buffer << endl;
 				}
 				else
 				{
-					cout << "--------------ÎÄ¼şÄÚÈİ£º--------------" << endl;
+					cout << "--------------æ–‡ä»¶å†…å®¹ï¼š--------------" << endl;
 					cout << buffer << endl;
 				}
 				Sendwait(clientSocket);
 			}
 			else {
-				cout << "ĞĞÊıÇëÒÔ-numÀàĞÍÊäÈë£¡" << endl;
+				cout << "è¡Œæ•°è¯·ä»¥-numç±»å‹è¾“å…¥ï¼" << endl;
 				string createinfo = "meaningless-command";
 				sendtoserver(clientSocket, createinfo);
 				Readin(clientSocket);
@@ -382,21 +382,21 @@ void menu(SOCKET clientSocket)
 				Readin(clientSocket);
 				if (!strcmp(buffer, "-@not"))
 				{
-					cout << "ÎÄ¼şÎª¿Õ£¡" << endl;
+					cout << "æ–‡ä»¶ä¸ºç©ºï¼" << endl;
 				}
-				else if (!strcmp(buffer, "ÕÒ²»µ½¸ÃÎÄ¼ş") || !strcmp(buffer, "ÇëÏÈ´ò¿ª¸ÃÎÄ¼ş") || !strcmp(buffer, "ÎÄ¼şÒÑ¼ÓËø£¬ÇëÏÈ½âËø") || !strcmp(buffer, "ĞĞÊı×îĞ¡Îª1"))
+				else if (!strcmp(buffer, "æ‰¾ä¸åˆ°è¯¥æ–‡ä»¶") || !strcmp(buffer, "è¯·å…ˆæ‰“å¼€è¯¥æ–‡ä»¶") || !strcmp(buffer, "æ–‡ä»¶å·²åŠ é”ï¼Œè¯·å…ˆè§£é”") || !strcmp(buffer, "è¡Œæ•°æœ€å°ä¸º1"))
 				{
 					cout << buffer << endl;
 				}
 				else
 				{
-					cout << "--------------ÎÄ¼şÄÚÈİ£º--------------" << endl;
+					cout << "--------------æ–‡ä»¶å†…å®¹ï¼š--------------" << endl;
 					cout << buffer << endl;
 				}
 				Sendwait(clientSocket);
 			}
 			else {
-				cout << "ĞĞÊıÇëÒÔ-numÀàĞÍÊäÈë£¡" << endl;
+				cout << "è¡Œæ•°è¯·ä»¥-numç±»å‹è¾“å…¥ï¼" << endl;
 				string createinfo = "meaningless-command";
 				sendtoserver(clientSocket, createinfo);
 				Readin(clientSocket);
@@ -463,7 +463,7 @@ void menu(SOCKET clientSocket)
 }
 void Login(SOCKET clientSocket)
 {
-	//´´½¨ÓÃ»§Ä¿Â¼±í
+	//åˆ›å»ºç”¨æˆ·ç›®å½•è¡¨
 	fstream fp;
 	fp.open(userLogin, ios::in);
 	if (!fp) {
@@ -471,15 +471,15 @@ void Login(SOCKET clientSocket)
 		fp.open(userLogin, ios::out);
 		fp.close();
 	}
-	int successFlag = 0;//±ê¼ÇÊÇ·ñÖÕÖ¹µÇÂ¼
+	int successFlag = 0;//æ ‡è®°æ˜¯å¦ç»ˆæ­¢ç™»å½•
 	while (!successFlag)
 	{
-		int haveUser = 0;//±ê¼ÇÊÇ·ñ´æÔÚ¸ÃÓÃ»§
-		//ÑéÖ¤ÓÃ»§Ãû
+		int haveUser = 0;//æ ‡è®°æ˜¯å¦å­˜åœ¨è¯¥ç”¨æˆ·
+		//éªŒè¯ç”¨æˆ·å
 		string inputName;
-		cout << "ÓÃ»§Ãû:";
+		cout << "ç”¨æˆ·å:";
 		cin >> inputName;
-		strip(inputName, ' ');//ÊäÈë²¢´¦ÀíÓÃ»§Ãû
+		strip(inputName, ' ');//è¾“å…¥å¹¶å¤„ç†ç”¨æˆ·å
 		ifstream fp;
 		fp.open(userLogin);
 		if (fp) {
@@ -488,7 +488,7 @@ void Login(SOCKET clientSocket)
 				string name, password;
 				halfStr(name, password, userLine);
 				if (name == inputName) {
-					haveUser = 1;//±ê¼ÇÈ·ÊµÓĞ¸ÃÓÃ»§
+					haveUser = 1;//æ ‡è®°ç¡®å®æœ‰è¯¥ç”¨æˆ·
 					userName = name;
 					userPassword = password;
 				}
@@ -496,30 +496,30 @@ void Login(SOCKET clientSocket)
 			fp.close();
 		}
 		else {
-			cout << userLogin << "´ò¿ª´íÎó£¡" << endl;
+			cout << userLogin << "æ‰“å¼€é”™è¯¯ï¼" << endl;
 			return;
 		}
 
-		//Èç¹ûÕÒµ½ÁËÓÃ»§Ãû£¬ÔòÊäÈëÃÜÂë
+		//å¦‚æœæ‰¾åˆ°äº†ç”¨æˆ·åï¼Œåˆ™è¾“å…¥å¯†ç 
 		if (haveUser) {
-			int flag = 1;//±ê¼ÇÊÇ·ñĞèÒªÖØĞÂ³öÈëÃÜÂë
-			int times = 0;//ÊäÈëÃÜÂëµÄ´ÎÊı£¬Èç¹ûÊäÈë´íÎó´óÓÚ3´Î£¬ÔòÖÕÖ¹µÇÂ¼
+			int flag = 1;//æ ‡è®°æ˜¯å¦éœ€è¦é‡æ–°å‡ºå…¥å¯†ç 
+			int times = 0;//è¾“å…¥å¯†ç çš„æ¬¡æ•°ï¼Œå¦‚æœè¾“å…¥é”™è¯¯å¤§äº3æ¬¡ï¼Œåˆ™ç»ˆæ­¢ç™»å½•
 			while (flag)
 			{
 				string inputPassword;
-				cout << "ÃÜÂë:";
+				cout << "å¯†ç :";
 				cin >> inputPassword; strip(inputPassword, ' ');
-				//Èç¹ûÃÜÂëÊäÈëÕıÈ·£¡
+				//å¦‚æœå¯†ç è¾“å…¥æ­£ç¡®ï¼
 				if (inputPassword == userPassword) {
 					flag = 0;
-					menu(clientSocket);//½øÈë¹¦ÄÜÓÃ»§½çÃæ
-					successFlag = 1;//³É¹¦µÇÂ¼
+					menu(clientSocket);//è¿›å…¥åŠŸèƒ½ç”¨æˆ·ç•Œé¢
+					successFlag = 1;//æˆåŠŸç™»å½•
 				}
-				//ÃÜÂëÊäÈë´íÎó
+				//å¯†ç è¾“å…¥é”™è¯¯
 				else {
 					times++;
-					if (times < 3) {//Ñ¡ÔñÊÇ·ñÖØĞÂÊäÈëÃÜÂë
-						cout << "ÊäÈëÃÜÂë´íÎó£¡" << endl << "ÊÇ·ñÖØĞÂÊäÈë£¨y/n£©?:";
+					if (times < 3) {//é€‰æ‹©æ˜¯å¦é‡æ–°è¾“å…¥å¯†ç 
+						cout << "è¾“å…¥å¯†ç é”™è¯¯ï¼" << endl << "æ˜¯å¦é‡æ–°è¾“å…¥ï¼ˆy/nï¼‰?:";
 						int again = 1;
 						while (again)
 						{
@@ -533,11 +533,11 @@ void Login(SOCKET clientSocket)
 								return;
 							}
 							else
-								cout << "ÄúµÄÊäÈëÓĞÎó£¡ÇëÖØĞÂÊäÈë£¨y/n£©:";
+								cout << "æ‚¨çš„è¾“å…¥æœ‰è¯¯ï¼è¯·é‡æ–°è¾“å…¥ï¼ˆy/nï¼‰:";
 						}
 					}
-					else {//ÃÜÂëÊäÈë´íÎó´ïµ½Èı´ÎÔòÖ±½ÓÍË³ö
-						cout << "ÊäÈëÃÜÂë´íÎóÒÑ´ïµ½3´Î£¡" << endl;
+					else {//å¯†ç è¾“å…¥é”™è¯¯è¾¾åˆ°ä¸‰æ¬¡åˆ™ç›´æ¥é€€å‡º
+						cout << "è¾“å…¥å¯†ç é”™è¯¯å·²è¾¾åˆ°3æ¬¡ï¼" << endl;
 						flag = 0;
 						return;
 					}
@@ -545,9 +545,9 @@ void Login(SOCKET clientSocket)
 				}
 			}
 		}
-		else {//Èç¹ûÃ»ÓĞÕÒµ½ÓÃ»§Ãû£¬±¨´í²¢ÇëÓÃ»§Ñ¡ÔñÊÇ·ñÖØĞÂÊäÈë		
+		else {//å¦‚æœæ²¡æœ‰æ‰¾åˆ°ç”¨æˆ·åï¼ŒæŠ¥é”™å¹¶è¯·ç”¨æˆ·é€‰æ‹©æ˜¯å¦é‡æ–°è¾“å…¥		
 			int again = 1;
-			cout << "±§Ç¸Ã»ÓĞÕÒµ½¸ÃÓÃ»§£¡" << endl << "ÊÇ·ñÖØĞÂÊäÈë£¨y/n£©?" << endl;
+			cout << "æŠ±æ­‰æ²¡æœ‰æ‰¾åˆ°è¯¥ç”¨æˆ·ï¼" << endl << "æ˜¯å¦é‡æ–°è¾“å…¥ï¼ˆy/nï¼‰?" << endl;
 			while (again)
 			{
 				string choice;
@@ -559,7 +559,7 @@ void Login(SOCKET clientSocket)
 					return;
 				}
 				else
-					cout << "ÄúµÄÊäÈëÓĞÎó£¡ÇëÖØĞÂÊäÈë£¨y/n£©:";
+					cout << "æ‚¨çš„è¾“å…¥æœ‰è¯¯ï¼è¯·é‡æ–°è¾“å…¥ï¼ˆy/nï¼‰:";
 			}
 		}
 	}
@@ -567,7 +567,7 @@ void Login(SOCKET clientSocket)
 
 void Register()
 {
-	//´´½¨ÓÃ»§Ä¿Â¼±í
+	//åˆ›å»ºç”¨æˆ·ç›®å½•è¡¨
 	fstream fp;
 	fp.open(userLogin, ios::in);
 	if (!fp) {
@@ -575,59 +575,59 @@ void Register()
 		fp.open(userLogin, ios::out);
 		fp.close();
 	}
-	int flag = 1;//±ê¼ÇÊÇ·ñÖÕÖ¹×¢²á
+	int flag = 1;//æ ‡è®°æ˜¯å¦ç»ˆæ­¢æ³¨å†Œ
 	while (flag)
 	{
-		string inputName, password, password2;//ÓÃ»§Ãû£¬ÃÜÂë£¬È·ÈÏÃÜÂë
-		int used = 0;//±ê¼ÇÓÃ»§ÃûÊÇ·ñÒÑ±»Ê¹ÓÃ¹ı
+		string inputName, password, password2;//ç”¨æˆ·åï¼Œå¯†ç ï¼Œç¡®è®¤å¯†ç 
+		int used = 0;//æ ‡è®°ç”¨æˆ·åæ˜¯å¦å·²è¢«ä½¿ç”¨è¿‡
 
-		//ÑéÖ¤ÓÃ»§Ãû
-		cout << "ÇëÊäÈë×¢²áÓÃ»§Ãû£º";
+		//éªŒè¯ç”¨æˆ·å
+		cout << "è¯·è¾“å…¥æ³¨å†Œç”¨æˆ·åï¼š";
 		cin >> inputName;
 		ifstream fp;
 		fp.open(userLogin);
 		if (fp) {
-			//´ÓÎÄ¼şÖĞ°´ĞĞ¶ÁÈ¡ÓÃ»§ĞÅÏ¢£¬²¢¸ù¾İ¿Õ¸ñ»®·ÖÓÃ»§ÃûºÍÃÜÂë
+			//ä»æ–‡ä»¶ä¸­æŒ‰è¡Œè¯»å–ç”¨æˆ·ä¿¡æ¯ï¼Œå¹¶æ ¹æ®ç©ºæ ¼åˆ’åˆ†ç”¨æˆ·åå’Œå¯†ç 
 			string userLine;
 			while (getline(fp, userLine)) {
 				string name, password;
 				halfStr(name, password, userLine);
 				if (name == inputName) {
-					used = 1;//±ê¼ÇÒÑ´æÔÚ¸ÃÓÃ»§
+					used = 1;//æ ‡è®°å·²å­˜åœ¨è¯¥ç”¨æˆ·
 				}
 			}
 			fp.close();
 		}
 		else {
-			cout << userLogin << "´ò¿ª´íÎó£¡" << endl;
+			cout << userLogin << "æ‰“å¼€é”™è¯¯ï¼" << endl;
 			return;
 		}
 
-		//ÑéÖ¤ÃÜÂë
+		//éªŒè¯å¯†ç 
 		if (!used) {
-			cout << "ÇëÊäÈëÃÜÂë£º";
+			cout << "è¯·è¾“å…¥å¯†ç ï¼š";
 			cin >> password;
-			cout << "ÇëÔÙ´ÎÊäÈëÃÜÂë£º";
+			cout << "è¯·å†æ¬¡è¾“å…¥å¯†ç ï¼š";
 			cin >> password2;
-			//Èç¹ûÁ½´ÎÊäÈëÃÜÂë¶¼ÓĞĞ§ÇÒÒ»ÖÂ£¬Ôò±£´æÓÃ»§ÃûºÍÃÜÂë£¬²¢ÌáÊ¾×¢²á³É¹¦
+			//å¦‚æœä¸¤æ¬¡è¾“å…¥å¯†ç éƒ½æœ‰æ•ˆä¸”ä¸€è‡´ï¼Œåˆ™ä¿å­˜ç”¨æˆ·åå’Œå¯†ç ï¼Œå¹¶æç¤ºæ³¨å†ŒæˆåŠŸ
 			if (password == password2) {
 				fstream fp;
 				fp.open(userLogin, ios::app);
 				if (fp) {
 					fp << inputName << " " << password2 << endl;
 					fp.close();
-					cout << "×¢²á³É¹¦£¡" << endl;
+					cout << "æ³¨å†ŒæˆåŠŸï¼" << endl;
 				}
 				else {
-					cout << userLogin << "´ò¿ª´íÎó£¡" << endl;
+					cout << userLogin << "æ‰“å¼€é”™è¯¯ï¼" << endl;
 					return;
 				}
 				flag = 0;
 			}
-			//Èç¹ûÁ½´ÎÊäÈëÃÜÂë²»Ò»ÖÂ£¬ÔòÌáÊ¾ÊÇ·ñÖØĞÂÊäÈë
+			//å¦‚æœä¸¤æ¬¡è¾“å…¥å¯†ç ä¸ä¸€è‡´ï¼Œåˆ™æç¤ºæ˜¯å¦é‡æ–°è¾“å…¥
 			else {
 				int again = 1;
-				cout << "Á½´ÎÃÜÂëÊäÈë²»Ò»ÖÂ£¡" << endl << "ÊÇ·ñÖØĞÂÊäÈë£¨y/n£©?:";
+				cout << "ä¸¤æ¬¡å¯†ç è¾“å…¥ä¸ä¸€è‡´ï¼" << endl << "æ˜¯å¦é‡æ–°è¾“å…¥ï¼ˆy/nï¼‰?:";
 				while (again)
 				{
 					string choice;
@@ -641,16 +641,16 @@ void Register()
 						return;
 					}
 					else {
-						cout << "ÄúµÄÊäÈëÓĞÎó£¡ÇëÖØĞÂÊäÈë£¨y/n£©:";
+						cout << "æ‚¨çš„è¾“å…¥æœ‰è¯¯ï¼è¯·é‡æ–°è¾“å…¥ï¼ˆy/nï¼‰:";
 					}
 				}
 			}
 		}
-		//Èç¹ûÓÃ»§ÃûÒÑ±»Ê¹ÓÃ£¬ÔòÌáÊ¾ÊÇ·ñÖØĞÂÊäÈë
+		//å¦‚æœç”¨æˆ·åå·²è¢«ä½¿ç”¨ï¼Œåˆ™æç¤ºæ˜¯å¦é‡æ–°è¾“å…¥
 		else
 		{
 			int again = 1;
-			cout << "ÓÃ»§ÃûÒÑ´æÔÚ£¡" << endl << "ÊÇ·ñÖØĞÂÊäÈë£¨y/n£©?" << endl;
+			cout << "ç”¨æˆ·åå·²å­˜åœ¨ï¼" << endl << "æ˜¯å¦é‡æ–°è¾“å…¥ï¼ˆy/nï¼‰?" << endl;
 			while (again)
 			{
 				string choice;
@@ -664,7 +664,7 @@ void Register()
 					return;
 				}
 				else {
-					cout << "ÄúµÄÊäÈëÓĞÎó£¡ÇëÖØĞÂÊäÈë£¨y/n£©:";
+					cout << "æ‚¨çš„è¾“å…¥æœ‰è¯¯ï¼è¯·é‡æ–°è¾“å…¥ï¼ˆy/nï¼‰:";
 				}
 			}
 		}
@@ -675,16 +675,16 @@ int main()
 {
 	WSADATA wsaData;
 	WORD wVersionRequested = MAKEWORD(2, 2);
-	// ³õÊ¼»¯Winsock¿â
+	// åˆå§‹åŒ–Winsockåº“
 	if (WSAStartup(wVersionRequested, &wsaData) != 0)
 	{
-		cout << "¼ÓÔØwinsock.dllÊ§°Ü£¡" << endl;
+		cout << "åŠ è½½winsock.dllå¤±è´¥ï¼" << endl;
 		return 0;
 	}
 	SOCKET clientSocket = socket(AF_INET, SOCK_STREAM, 0);
 	if (clientSocket == INVALID_SOCKET)
 	{
-		cout << "´´½¨Ì×½Ó×ÖÊ§°Ü£¡´íÎó´úÂë£º" << WSAGetLastError() << endl;
+		cout << "åˆ›å»ºå¥—æ¥å­—å¤±è´¥ï¼é”™è¯¯ä»£ç ï¼š" << WSAGetLastError() << endl;
 		Cleanup(clientSocket);
 		return 0;
 	}
@@ -696,19 +696,19 @@ int main()
 
 	if (connect(clientSocket, reinterpret_cast<SOCKADDR*>(&serverAddress), sizeof(serverAddress)) == SOCKET_ERROR)
 	{
-		cout << "Á¬½ÓÊ§°Ü£¡´íÎó´úÂë£º" << WSAGetLastError() << endl;
+		cout << "è¿æ¥å¤±è´¥ï¼é”™è¯¯ä»£ç ï¼š" << WSAGetLastError() << endl;
 		Cleanup(clientSocket);
 		return 0;
 	}
 	int i, j, k, n = 0, x = 0, y = 50;
 	getchar();
 	system("cls");
-	cout << "ÏµÍ³¼ÓÔØÖĞ¡­¡­" << endl;
-	cout << "¼ÓÔØÍê³É!" << endl;
+	cout << "ç³»ç»ŸåŠ è½½ä¸­â€¦â€¦" << endl;
+	cout << "åŠ è½½å®Œæˆ!" << endl;
 	Sleep(800);
 	while (true)
 	{
-		cout << "ÇëµÇÂ¼»ò×¢²á" << endl;
+		cout << "è¯·ç™»å½•æˆ–æ³¨å†Œ" << endl;
 		string choice;
 		cin >> choice;
 		if (choice == "login") Login(clientSocket);
@@ -717,7 +717,7 @@ int main()
 			Register(); getchar();
 		}
 		else if (choice == "exit") return 0;
-		else cout << "ÊäÈë´íÎó" << endl;
+		else cout << "è¾“å…¥é”™è¯¯" << endl;
 		getchar();
 	}
 
